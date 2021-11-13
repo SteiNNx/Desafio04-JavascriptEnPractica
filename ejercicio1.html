@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <div>
+        <div style="width: 40%;margin: 0 auto">
+            <h2>
+                Escríbenos !!!
+            </h2>
+            <div class="resultado" style="color:green;font-style: italic">
+            </div>
+            <form id="formulario">
+                <div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Nombre completo
+                        </label>
+                        <input id="nombre" type="text">
+                        <p class="errorNombre" style="color:red;font-style: italic;"></p>
+                    </div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Asunto
+                        </label>
+                        <input id="asunto" type="text">
+                        <p class="errorAsunto" style="color:red;font-style: italic;"></p>
+                    </div>
+                </div>
+                <div style="display: flex;flex-direction: column;">
+                    <label>
+                        Mensaje
+                    </label>
+                    <textarea id="mensaje"></textarea>
+                    <p class="errorMensaje" style="color:red;font-style: italic;"></p>
+                </div>
+                <div>
+                    <button id="botton" type="submit">
+                        Envíar mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        /** Utils */
+        const REGEX_ALFABETICO = /([a-zA-Z ])\w+/
+        const MENSAJE_DEFAULT = mensaje => `El ${mensaje} es requerido`;
+
+        /** Funciones */
+        const getValueById = (valueNameId) => {
+            return document.getElementById(valueNameId).value;
+        }
+
+        const showError = (valueMsj, valueNameClassName) => {
+            document.getElementsByClassName(valueNameClassName)[0].innerHTML = MENSAJE_DEFAULT(valueMsj);
+        }
+
+        const showResultado = (valueMsj) => {
+            document.getElementsByClassName('resultado')[0].innerHTML = valueMsj;
+        }
+
+        const cleanErrorMsj = () => {
+            [...document.getElementsByTagName('p')]
+                .forEach(function (element) {
+                    element.innerHTML = '';
+                });
+            showResultado('');
+        }
+
+        const validar = () => {
+            return {
+                nombre: REGEX_ALFABETICO.test(getValueById('nombre')),
+                asunto: REGEX_ALFABETICO.test(getValueById('asunto')),
+                mensaje: REGEX_ALFABETICO.test(getValueById('mensaje')),
+            }
+        }
+
+        /** EvenListener */
+        document.getElementById('botton')
+            .addEventListener('click', function (event) {
+                event.preventDefault();
+                cleanErrorMsj();
+                const { nombre, asunto, mensaje } = validar();
+                if (!nombre) {
+                    showError('nombre', 'errorNombre')
+                }
+                if (!asunto) {
+                    showError('asunto', 'errorAsunto')
+                }
+                if (!mensaje) {
+                    showError('mensaje', 'errorMensaje')
+                }
+                if (nombre && asunto && mensaje) {
+                    showResultado('Mensaje enviado con éxito!!!');
+                }
+
+            })
+    </script>
+</body>
+
+</html>
