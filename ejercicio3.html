@@ -38,15 +38,9 @@
         /** Funciones */
         const obtenerValoresInputs = () => {
             return {
-                valor1: document.getElementById('valor1').value,
-                valor2: document.getElementById('valor2').value,
+                valor1: parseInt(document.getElementById('valor1').value),
+                valor2: parseInt(document.getElementById('valor2').value),
             };
-        }
-        const parseValues = (value1, value2) => {
-            return {
-                int_valor1: parseInt(value1),
-                int_valor2: parseInt(value2),
-            }
         }
         const isNumber = (value1, value2) => {
             if (typeof value1 === 'NaN'
@@ -64,17 +58,15 @@
         document.getElementById('btn-sumar')
             .addEventListener('click', function () {
                 const { valor1, valor2 } = obtenerValoresInputs();
-                const { int_valor1, int_valor2 } = parseValues(valor1, valor2);
-                isNumber(int_valor1, int_valor2);
-                const resultado = int_valor1 + int_valor2;
+                isNumber(valor1, valor2);
+                const resultado = valor1 + valor2;
                 setResultado(resultado);
             });
         document.getElementById('btn-restar')
             .addEventListener('click', function () {
                 const { valor1, valor2 } = obtenerValoresInputs();
-                const { int_valor1, int_valor2 } = parseValues(valor1, valor2);
-                isNumber(int_valor1, int_valor2);
-                const resultado = int_valor1 - int_valor2;
+                isNumber(valor1, valor2);
+                const resultado = valor1 - valor2;
                 setResultado(resultado >= 0 ? resultado : 0);
             });
     </script>

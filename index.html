@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>
+        Resultado: <span class="resultado"></span>
+    </h2>
+    <script>
+        let resultado = document.getElementsByClassName('resultado')[0];
+
+        let numero1 = prompt("Ingresa un número: ", 0);
+        let numero2 = prompt("Ingresa un segundo número: ", 0);
+
+        let suma = parseInt(numero1) + parseInt(numero2);
+        console.log(typeof numero1);
+        console.log(typeof numero2);
+        console.log("Las suma es: ", suma);
+        console.log(resultado);
+        if (1 <= suma & suma <= 20) {
+            resultado.innerHTML = (suma);
+        } else {
+            resultado.innerHTML = ("No");
+        }
+    </script>
+</body>
+
+</html>
